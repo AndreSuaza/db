@@ -1,0 +1,10 @@
+<div *ngIf="!user">
+    <div class="container">
+        <form class="form-signin">
+            <h1>Hello !</h1>
+            <label for="inputEmail" class="sr-only">Login With Google</label>
+            <button class="btn btn-lg btn-danger btn-block" (click)="uthService.login()"><i class="fab fa-google"></i></button>
+            <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+        </form>
+    </div>
+</div>

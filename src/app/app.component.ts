@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'dragonBall';
+  user = null;
+  constructor(public authService: AuthService) {
+    authService.subcribeAuth().subscribe(
+      (user) => {
+        this.user = user;
+        authService.isloggedIn(user);
+    });
+  }
 }
