@@ -21,8 +21,13 @@ import { HomeComponent } from './components/home/home.component';
 import { BattleComponent } from './components/battle/battle.component';
 import { StadiumComponent } from './components/stadium/stadium.component';
 import { BattlefieldComponent } from './components/battlefield/battlefield.component';
-import { LoadProfileComponent } from './components/load-profile/load-profile.component';
 import { LoadBattleComponent } from './components/load-battle/load-battle.component';
+import { LoadDeckComponent } from './components/load-deck/load-deck.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { MenuComponent } from './components/menu/menu.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +38,11 @@ import { LoadBattleComponent } from './components/load-battle/load-battle.compon
     BattleComponent,
     StadiumComponent,
     BattlefieldComponent,
-    LoadProfileComponent,
-    LoadBattleComponent
+    LoadBattleComponent,
+    LoadDeckComponent,
+    ProfileComponent,
+    MenuComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,8 @@ import { LoadBattleComponent } from './components/load-battle/load-battle.compon
   providers: [
     AngularFirestore,
     BattlesService,
-    GameService
+    GameService,
+    AngularFireAuthGuard
   ],
   bootstrap: [AppComponent]
 })

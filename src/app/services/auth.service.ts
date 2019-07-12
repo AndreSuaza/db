@@ -8,27 +8,17 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user: any = null;
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    afAuth.user.subscribe((user) => { this.user = user; this.isloggedIn(user); });
-  }
 
-  subcribeAuth() {
-    return this.afAuth.user;
+  constructor(public afAuth: AngularFireAuth, private router: Router) {
+    afAuth.user.subscribe((user) => { this.user = user; });
   }
 
   login() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
+
   logut() {
     this.afAuth.auth.signOut();
   }
 
-  isloggedIn(user: any) {
-    if (user !== null) {
-      return true;
-    } else {
-      console.log('!isloggedIn');
-     // this.router.navigate(['login']);
-    }
-  }
 }

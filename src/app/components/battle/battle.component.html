@@ -1,10 +1,77 @@
-<h2>Player 1: {{playerOne}}</h2>
-  <ul>
-    <li>deck: {{deckOne}}</li>
-    <li>mano: {{handNumberOne}}</li>
-  </ul>
-<h2>Player 2: {{playerTwo}}</h2>
-  <ul>
-    <li>deck: {{deckTwo}}</li>
-    <li>mano: {{handNumberTwo}}</li>
-  </ul>
+<div class="container-fluid stadium">
+    <div class="detail">
+        hola
+    </div>
+    <div class="mesa">
+        <div class="two">
+            <div class="leader">leader</div>
+            <div class="battle">battle</div>
+            <div class="combos">combos</div>
+            <div class="energies">energias</div> 
+            <div class="handTwo">hand</div>  
+        </div> 
+        <div class="one">
+            <div class="leader">
+                <div *ngIf="leaderOne">
+                    <div class="cards card-leader" 
+                    [ngStyle]="{'background-image': 'url('+leaderOne[0].img+')'}" 
+                    (mouseenter) = "detail(leaderOne[0])"
+                    ></div>
+                </div>
+            </div>
+            <div class="battle">
+                <div *ngIf="fightersOne">
+                    <div *ngFor="let card of fightersOne; let i = index">
+                        <div  [ngClass]="['cards card-energie']" 
+                        [ngStyle]="
+                        {'margin-left': util.calMarginLeft( i, 625, 100, fightersOne.length )
+                        ,'background-image': 'url('+card.img+')'}"  
+                        (mouseenter) = "detail(card)"
+                        (click) = "menuService.menuActions(2, $event, card)"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="combos">
+                <div *ngIf="combosOne">
+                    <div *ngFor="let card of combosOne; let i = index">
+                        <div class="cards card-energie" 
+                        [ngStyle]="
+                        {'margin-left': util.calMarginLeft( i, 625, 100, combosOne.length )
+                        ,'background-image': 'url('+card.img+')'}"  
+                        (mouseenter) = "detail(card)"
+                        (click) = "menuService.menuActions(4, $event, card)"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="energies">
+                <div *ngIf="energiesOne">
+                    <div *ngFor="let card of energiesOne; let i = index">
+                        <div class="cards card-energie" 
+                        [ngStyle]="
+                        {'margin-left': util.calMarginLeft( i, 625, 100, energiesOne.length )
+                        ,'background-image': 'url('+card.img+')'}"  
+                        (mouseenter) = "detail(card)"
+                        (click) = "menuService.menuActions(3, $event, card)"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="handOne">
+                <div *ngIf="hand">
+                    <div *ngFor="let card of hand; let i = index">
+                        <div class="cards card-hand" 
+                        [ngStyle]="
+                        {'margin-left': util.calMarginLeft( i, 625, 100, hand.length )
+                        ,'background-image': 'url('+card.img+')'}"  
+                        (mouseenter) = "detail(card)"
+                        (click) = "menuService.menuActions(1, $event, card)"
+                        ></div>
+                    </div>
+                </div>
+            </div>  
+        </div> 
+    </div>
+</div>
+<app-menu></app-menu>

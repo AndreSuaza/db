@@ -8,12 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'dragonBall';
-  user = null;
   constructor(public authService: AuthService) {
-    authService.subcribeAuth().subscribe(
-      (user) => {
-        this.user = user;
-        authService.isloggedIn(user);
-    });
   }
 }

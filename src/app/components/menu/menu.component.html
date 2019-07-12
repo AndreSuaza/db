@@ -1,0 +1,18 @@
+<div *ngIf="ms.active">
+
+  <div class="menu"  [ngStyle]="{'width': '100px', 
+  'left': ms.menuPosition('x'),
+  'top': ms.menuPosition('y')}" 
+  (mouseleave) = "ms.closeMenu()"    
+  >
+
+  <p *ngIf="ms.coll === 1 " (click)="ms.move(3)" class="">load</p>
+  <p *ngIf="ms.coll === 1 || ms.coll === 2" (click)="ms.move(4)" class="">combo</p>
+  <p *ngIf="ms.coll <= 7 && ms.coll !== 2" (click)="ms.move(2)" class="">fighter</p>
+  <p *ngIf="ms.coll <= 7 && ms.coll !== 5" (click)="ms.move(5)" class="">drop</p>
+  <p *ngIf="ms.coll <= 7 && ms.coll !== 6" (click)="ms.move(6)" class="">warp</p>
+  <p *ngIf="ms.coll <= 6" (click)="ms.move(7)" class="">deck</p>
+  <p *ngIf="ms.coll >= 5 || ms.coll === 2" (click)="ms.move(1)" class="">hand</p>
+  <p *ngIf="ms.coll === 2 || ms.coll === 3"  (click)="ms.use()" class="">atacar</p>
+  </div>
+</div>

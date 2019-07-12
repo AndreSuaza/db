@@ -2,5 +2,7 @@
 import { Card } from './Card';
 export class Deck {
     maindeck: Card[];
-    sidedeck: Card[];
+    sidedeck?: Card[];
+    leader: Card[];
+    name: string;
 }

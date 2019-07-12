@@ -1,0 +1,13 @@
+<div class="container mt-3">
+  <div class="row">
+      <div class="col-sm">
+        <h2>New Profile</h2>
+          <form>
+              <div class="form-group">
+                  <input type="text" [(ngModel)]="nickname" name="nickname"  class="form-control" placeholder="Nickname" required>
+              </div>
+              <button class="btn btn-lg btn-primary mt-2 " (click)="createProfile()">Create</button>
+          </form>
+      </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { Game } from '../../entitys/Game';
 import { Card } from '../../entitys/Card';
+import { Deck } from '../../entitys/Deck';
 
 @Component({
   selector: 'app-load-battle',
@@ -29,11 +30,11 @@ export class LoadBattleComponent implements OnInit {
       this.battle = battle;
       if (battle) {
         if (battle.idPlayerOne === authService.user.uid || battle.idPlayerTwo === authService.user.uid) {
-        loadProfileService.getProfile(authService.user.uid).subscribe(
+        loadProfileService.getProfile().subscribe(
           (profile) => {
-          loadProfileService.getMainDeck(authService.user.uid, profile.namedeck).subscribe(
+          loadProfileService.getMainDeck(profile.namedeck).subscribe(
             (deck) => {
-              this.drawHand(idBattle, battle.idPlayerOne, battle.idPlayerTwo, authService.user.uid, deck.maindeck, profile.hand);
+              this.drawHand(idBattle, battle.idPlayerOne, battle.idPlayerTwo, authService.user.uid, deck, profile.hand);
             });
         });
       } else {
@@ -46,34 +47,37 @@ export class LoadBattleComponent implements OnInit {
   ngOnInit() {
   }
 
-  drawHand(idBattle: string, idPlayerOne: string, idPlayerTwo: string, idUser: string, deck: Card[], hand: Card[] ) {
+  drawHand(idBattle: string, idPlayerOne: string, idPlayerTwo: string, idUser: string, deck: Deck, hand: Card[] ) {
     for (let i = 0; i < 1; i++) {
-      hand[i] = deck[i];
-      deck.splice(i, 1);
+      hand[i] = deck.maindeck[i];
+      deck.maindeck.splice(i, 1);
     }
-    this.loadProfileService.setCurrentDeck(idUser, deck);
-    this.loadProfileService.setCurrentHand(idUser, hand);
+
+    this.loadProfileService.setCurrentDeck( deck.maindeck);
+    this.loadProfileService.setCurrentHand( hand);
 
     if (idUser === idPlayerOne) {
-      this.setPlayerOne(idBattle, hand.length, deck.length);
+      this.setPlayerOne(idBattle, hand.length, deck.maindeck.length, deck.leader);
     }
     if (idUser === idPlayerTwo) {
-      this.setPlayerTwo(idBattle, hand.length, deck.length);
+      this.setPlayerTwo(idBattle, hand.length, deck.maindeck.length, deck.leader);
     }
   }
 
-  setPlayerOne(idBattle: string, numberHand: number, numberDeck: number) {
+  setPlayerOne(idBattle: string, numberHand: number, numberDeck: number, leader: Card[]) {
     const gameNew: Game = {
       handOne: numberHand,
       deckOne: numberDeck,
+      leaderOne: leader
     };
     this.gameService.setGame(idBattle, gameNew);
   }
 
-  setPlayerTwo(idBattle: string, numberHand: number, numberDeck: number) {
+  setPlayerTwo(idBattle: string, numberHand: number, numberDeck: number, leader: Card[]) {
     const gameNew: Game = {
       handTwo: numberHand,
       deckTwo: numberDeck,
+      leaderTwo: leader
     };
     this.gameService.setGame(idBattle, gameNew);
   }

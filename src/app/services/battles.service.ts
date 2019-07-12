@@ -38,6 +38,10 @@ export class BattlesService {
       );
   }
 
+  endBattle(idBattle: string) {
+    return this.battles.doc(idBattle).update({state: 0});
+  }
+
   setBattle(battle: Battle) {
     return this.battles.add(battle);
   }
@@ -47,7 +51,7 @@ export class BattlesService {
   }
 
   setPlayerTwoInBattle(idBattle: string, idPlayerTwo, nickName: string) {
-    return this.battles.doc(idBattle).update({playerTwo: nickName, idPlayerTwo });
+    return this.battles.doc(idBattle).update({playerTwo: nickName, idPlayerTwo, state: 1 });
    }
 
   deleteBattle(idBattle: string ) {
